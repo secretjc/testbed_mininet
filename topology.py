@@ -30,12 +30,13 @@ class Topology( Topo ):
         self.build_topo(configs)
         self.hostNum = len(self.host_set)
         self.switchNum = len(self.switch_set)
+        self.scale = 1
+        self.base_bw = 500
 
     def build_topo(self, configs):
         """
         Add hosts, switches, links when parsing the file.
         """
-        scale = 1
         topo_file = configs['topo_config']['topology']['cap_file']
         with open(topo_file, 'r') as f:
             for line in f:
@@ -47,7 +48,7 @@ class Topology( Topo ):
                 if src in self.graph[dst]:
                     continue
 
-                cap = float(cap) * scale
+                cap = float(cap)
                 self.graph[src].add(dst)
                 self.graph[dst].add(src)
                 for node in [src, dst]:
@@ -71,7 +72,7 @@ class Topology( Topo ):
                     # Connect the host and switch.
                     # Caveat: Setting port number as 0 causes problems
                     # in mininet.
-                    linkopts = dict(bw=500 * scale)
+                    linkopts = dict(bw=self.base_bw * self.scale)
                     l_high = self.addLink(h_high, s, port1=1, port2=1, **linkopts)
                     l_low = self.addLink(h_low, s, port1=1, port2=2, **linkopts)
                     self.switch_ports[switch_name] = {host_name_high: 1, host_name_low: 2}
@@ -80,7 +81,7 @@ class Topology( Topo ):
                 # Add links between src and dst switches.
                 src_switch = 's_{}'.format(src)
                 dst_switch = 's_{}'.format(dst)
-                linkopts = dict(bw=cap)
+                linkopts = dict(bw=cap * self.scale)
                 p1 = len(self.switch_ports[src_switch]) + 1
                 p2 = len(self.switch_ports[dst_switch]) + 1
                 l = self.addLink(self.switch_set[src_switch],
@@ -136,7 +137,7 @@ class Topology( Topo ):
                 sd_pair.append((self.host_set[src],
                                 self.host_set[dst],
                                 session,
-                                int(dm)))
+                                int(dm) * self.scale))
         #sd_pair = [(self.host_set['hh_0'], self.host_set['hh_2'], 20),
         #           (self.host_set['hl_0'], self.host_set['hl_2'], 50),
         #           (self.host_set['hh_0'], self.host_set['hh_1'], 20),
