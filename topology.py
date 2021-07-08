@@ -19,6 +19,7 @@ class Topology( Topo ):
 
     def build( self, configs ):
         # Numbering:  h0,h1,h2, s0,s1,s2
+        self.scale = 1
         self.base_bw = 500
         self.configs = configs
         self.host_set = {}
@@ -31,7 +32,6 @@ class Topology( Topo ):
         self.build_topo(configs)
         self.hostNum = len(self.host_set)
         self.switchNum = len(self.switch_set)
-        self.scale = 1
 
     def build_topo(self, configs):
         """
