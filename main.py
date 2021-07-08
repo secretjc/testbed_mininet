@@ -17,7 +17,7 @@ def parse_args():
   parser.add_argument('--main_config', default='./_config/main.yaml',
                       help='main config file')
   parser.add_argument('--topo_config',
-                      default='./_config/topo_toy.yaml',
+                      default='./_config/topo.yaml',
                       help='topology config file')
   return parser.parse_args()
 
