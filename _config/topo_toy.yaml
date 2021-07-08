@@ -1,8 +1,8 @@
 topology:
-  cap_file: 'toy_cap.tab'
-  tunnel_file: 'toy_tunnel.tab'
-  initial_file: 'toy_initial.tab'
-  demand_file: 'toy_demand.tab'
+  cap_file: './_data/toy_cap.tab'
+  tunnel_file: './_data/toy_tunnel.tab'
+  initial_file: './_data/toy_initial.tab'
+  demand_file: './_data/toy_demand.tab'
 demand:
   bw: 0.2
-  demand_file: 'toy_demand.tab'
+  demand_file: './_data/toy_demand.tab'
