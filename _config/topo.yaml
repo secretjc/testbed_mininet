@@ -1,8 +1,8 @@
 topology:
-  cap_file: 'capa.tab'
-  tunnel_file: 'tunnel.tab'
-  initial_file: 'initial.tab'
-  demand_file: 'demand.tab'
+  cap_file: './_data/capa.tab'
+  tunnel_file: './_data/tunnel.tab'
+  initial_file: './_data/initial.tab'
+  demand_file: './_data/demand.tab'
 demand:
   bw: 0.2
-  demand_file: 'demand.tab'
+  demand_file: './_data/demand.tab'
