@@ -2,12 +2,14 @@
 echo "git clone https://github.com/secretjc/testbed_mininet.git is done"
 echo "basic config..."
 #sudo passwd secretjc
+cd ~/
 echo -e "000000\n000000" | passwd secretjc
 sudo scp testbed_mininet/other_files/sshd_config /etc/ssh/sshd_config
 sudo service ssh restart
 sudo scp testbed_mininet/other_files/sudoers /etc/sudoers
 
 echo "cloning mininet..."
+cd ~/
 git clone git://github.com/mininet/mininet
 cd mininet
 git checkout -b mininet-2.3.0d6 2.3.0d6
