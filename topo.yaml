@@ -1,0 +1,8 @@
+topology:
+  cap_file: 'capa.tab'
+  tunnel_file: 'tunnel.tab'
+  initial_file: 'initial.tab'
+  demand_file: 'demand.tab'
+demand:
+  bw: 0.2
+  demand_file: 'demand.tab'
