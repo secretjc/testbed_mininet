@@ -1,0 +1,3 @@
+main:
+  log_level: 'INFO'
+  log_file: 'main_log.txt'
