@@ -76,7 +76,7 @@ Things to do:
 
 
 from mininet.node import Node, Host, OVSSwitch, Controller
-from mininet.link import Link, Intf
+from mininet.link import TCLink, Link, Intf
 from mininet.net import Mininet
 from mininet.topo import LinearTopo
 from mininet.topolib import TreeTopo
@@ -347,7 +347,7 @@ class RemoteOVSSwitch( RemoteMixin, OVSSwitch ):
         return switches
 
 
-class RemoteLink( Link ):
+class RemoteLink( TCLink ):
     "A RemoteLink is a link between nodes which may be on different servers"
 
     def __init__( self, node1, node2, **kwargs ):
@@ -360,7 +360,7 @@ class RemoteLink( Link ):
         kwargs.setdefault( 'params1', {} )
         kwargs.setdefault( 'params2', {} )
         self.cmd = None  # satisfy pylint
-        Link.__init__( self, node1, node2, **kwargs )
+        TCLink.__init__( self, node1, node2, **kwargs )
 
     def stop( self ):
         "Stop this link"
@@ -369,7 +369,7 @@ class RemoteLink( Link ):
             self.intf1.delete()
             self.intf2.delete()
         else:
-            Link.stop( self )
+            TCLink.stop( self )
         self.tunnel = None
 
     def makeIntfPair( self, intfname1, intfname2, addr1=None, addr2=None,
@@ -385,7 +385,7 @@ class RemoteLink( Link ):
         server2 = getattr( node2, 'server', 'localhost' )
         if server1 == server2:
             # Link within same server
-            return Link.makeIntfPair( intfname1, intfname2, addr1, addr2,
+            return TCLink.makeIntfPair( intfname1, intfname2, addr1, addr2,
                                       node1, node2, deleteIntfs=deleteIntfs )
         # Otherwise, make a tunnel
         self.tunnel = self.makeTunnel( node1, node2, intfname1, intfname2,
@@ -468,7 +468,7 @@ class RemoteLink( Link ):
                     self.tunnel.pid, self.cmd )
         else:
             status = "OK"
-        result = "%s %s" % ( Link.status( self ), status )
+        result = "%s %s" % ( TCLink.status( self ), status )
         return result
 
 
