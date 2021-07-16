@@ -4,12 +4,12 @@ sudo service ssh restart
 sudo scp testbed_mininet/other_files/sudoers /etc/sudoers
 
 ssh-keygen -t rsa -b 4096 -C "chuanjiang93@gmail.com"
-ssh-copy-id secretjc@ms0333.utah.cloudlab.us
-ssh-copy-id secretjc@ms0301.utah.cloudlab.us
-ssh-copy-id secretjc@ms0325.utah.cloudlab.us
-ssh-copy-id secretjc@ms0338.utah.cloudlab.us
-ssh-copy-id secretjc@ms0310.utah.cloudlab.us
-ssh-copy-id secretjc@ms0305.utah.cloudlab.us
-ssh-copy-id secretjc@ms0338.utah.cloudlab.us
-ssh-copy-id secretjc@ms0310.utah.cloudlab.us
-ssh-copy-id secretjc@ms0305.utah.cloudlab.us
+ssh-copy-id secretjc@ms0216.utah.cloudlab.us
+ssh-copy-id secretjc@ms0226.utah.cloudlab.us
+ssh-copy-id secretjc@ms0219.utah.cloudlab.us
+ssh-copy-id secretjc@ms0209.utah.cloudlab.us
+ssh-copy-id secretjc@ms0218.utah.cloudlab.us
+ssh-copy-id secretjc@ms0238.utah.cloudlab.us
+ssh-copy-id secretjc@ms0220.utah.cloudlab.us
+ssh-copy-id secretjc@ms0233.utah.cloudlab.us
+ssh-copy-id secretjc@ms0217.utah.cloudlab.us
