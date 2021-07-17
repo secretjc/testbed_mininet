@@ -1,0 +1,23 @@
+For local run:
+1. Git clone this repo
+2. Run sh utils/config.sh
+   This will install mininet, stochastic ovs and yaml.
+3. Set 'is_cluster' to False in _config/main.yaml
+4. Run sudo python main.py --main_config ./_config/main.yaml --topo_config ./_config/topo_toy.yaml
+
+For cluster run on cloudlab:
+1. In each machine, git clone this repo
+2. In each machine, run sh utils/config.sh
+3. Change 'secretjc' in testbed_mininet/other_files/sudoers to your own username
+3. Configure ssh in each machine:
+   echo -e "111111\n111111\n" | sudo passwd username # username should be your own username
+   sudo scp testbed_mininet/other_files/sshd_config /etc/ssh/sshd_config
+   sudo service ssh restart
+   sudo scp testbed_mininet/other_files/sudoers /etc/sudoers
+4. Generate ssh-key in each machine
+   ssh-keygen -t rsa -b 4096 -C "chuanjiang93@gmail.com"
+5. Populate ssh key to each machine using
+   ssh-copy-id username@server_ip
+6. Put server IPs in testbed.py line 37 in first machine (Note that first machine is localhost)
+7. Set 'is_cluster' to True in _config/main.yaml
+8. Run sudo python main.py --main_config ./_config/main.yaml --topo_config ./_config/topo_toy.yaml in first machine
