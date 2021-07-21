@@ -21,3 +21,11 @@ For cluster run on cloudlab:
 6. Put server IPs in testbed.py line 37 in first machine (Note that first machine is localhost)
 7. Set 'is_cluster' to True in _config/main.yaml
 8. Run sudo python main.py --main_config ./_config/main.yaml --topo_config ./_config/topo_toy.yaml in first machine
+
+Multiple scenarios automation
+1. start mininet with failed link ()
+2. wait until all iperf done
+3. stop mininet
+4. cleanup mininet ('sudo mn -c' run on all servers)
+5. store all iperf output file
+(6. transfer files to local server)
