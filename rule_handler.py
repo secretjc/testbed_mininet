@@ -89,42 +89,36 @@ class Rule_handler(object):
             for line in f:
                 if "s" in line:
                     continue
-                tunnel_num, s, t, prio, weight = line.strip().split(' ')
+                tunnel_num, s, t, weight = line.strip().split(' ')
                 #if int(weight) == 0:
                 #    continue
                 port = self.tunnel_first_hop[tunnel_num]
-                if (s, t, prio) not in groups_info:
-                    if prio == 'h':
-                        group_id = int(t) * 2 + 2
-                    else:
-                        group_id = int(t) * 2 + 1
+                if (s, t) not in groups_info:
+                    group_id = int(t)
                     groups_cmd = "group_id={},type=select,selection_method=hash,fields(ip_src,ip_dst,tcp_src,tcp_dst,udp_src,udp_dst)".format(group_id)
                     num_bucket = 0
                 else:
-                    groups_cmd, num_bucket = groups_info[(s, t, prio)]
+                    groups_cmd, num_bucket = groups_info[(s, t)]
                 num_bucket += 1
                 bucket_cmd = "bucket=bucket_id={},weight={},actions=push_mpls:0x8847,set_field:{}->mpls_label,output:{}".format(num_bucket, weight, tunnel_num, port)
                 groups_cmd = groups_cmd + "," + bucket_cmd
-                groups_info[(s, t, prio)] = (groups_cmd, num_bucket)
-        for s, t, prio in groups_info:
+                groups_info[(s, t)] = (groups_cmd, num_bucket)
+        for s, t in groups_info:
             src_switch_name = 's_{}'.format(s)
             #dst_switch_name = 's_{}'.format(t)
             src_switch = self.topo.switch_set[src_switch_name]
             cmd = "-O {} add-group".format(OPENFLOW_PROTO)
-            parameters, _ = groups_info[s, t, prio]
+            parameters, _ = groups_info[s, t]
             parameters = "\"" + parameters + "\""
             logging.debug("dpctl cmd: ovs-ofctl %s %s %s"
                             % (cmd, src_switch_name, parameters))
-            rules_set[src_switch].append((cmd, parameters))
+            rules_set[src_switch].append((cmd, parameters)) 
             #src_switch.dpctl(cmd, parameters)
 
-            if prio == 'h':
-                group_id = int(t) * 2 + 2
-                dst_host_name = 'hh_{}'.format(t)
-            else:
-                group_id = int(t) * 2 + 1
-                dst_host_name = 'hl_{}'.format(t)
+            group_id = int(t)
+            dst_host_name = 'h_{}'.format(t)
             dst_host = self.topo.host_set[dst_host_name]
+
             cmd = "-O {} add-flow".format(OPENFLOW_PROTO)
             parameters = "table=0,ip,ip_dst={},eth_type=0x800,actions=group:{}".format(dst_host.IP(), group_id)
             logging.debug("dpctl cmd: ovs-ofctl %s %s %s"
