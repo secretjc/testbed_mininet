@@ -60,22 +60,18 @@ class Topology( Topo ):
                     s = self.addSwitch(switch_name)
                     self.switch_set[switch_name] = s
 
-                    # Add 2 hosts (for high and low priority)
-                    host_name_high = 'hh_{}'.format(node)
-                    host_name_low = 'hl_{}'.format(node)
-                    h_high = self.addHost(host_name_high)
-                    h_low = self.addHost(host_name_low)
-                    self.host_set[host_name_high] = h_high
-                    self.host_set[host_name_low] = h_low
-                    self.hosts_to_switches[switch_name] = [host_name_high, host_name_low]
+                    # Add 1 host
+                    host_name = 'h_{}'.format(node)
+                    h = self.addHost(host_name)
+                    self.host_set[host_name] = h
+                    self.hosts_to_switches[switch_name] = host_name
 
                     # Connect the host and switch.
                     # Caveat: Setting port number as 0 causes problems
                     # in mininet.
                     linkopts = dict(bw=self.base_bw * self.scale)
-                    l_high = self.addLink(h_high, s, port1=1, port2=1, **linkopts)
-                    l_low = self.addLink(h_low, s, port1=1, port2=2, **linkopts)
-                    self.switch_ports[switch_name] = {host_name_high: 1, host_name_low: 2}
+                    l = self.addLink(h, s, port1=1, port2=1, **linkopts)
+                    self.switch_ports[switch_name] = {host_name: 1}
                     #self.intfs[l.intf2] = (s, h)
 
                 # Add links between src and dst switches.
@@ -110,8 +106,8 @@ class Topology( Topo ):
         for host_name in self.host_set:
             self.host_set[host_name] = net.getNodeByName(host_name)
         for switch_name in self.hosts_to_switches:
-            host_name_high, host_name_low = self.hosts_to_switches[switch_name]
-            self.hosts_to_switches[switch_name] = [self.host_set[host_name_high], self.host_set[host_name_low]]
+            host_name = self.hosts_to_switches[switch_name]
+            self.hosts_to_switches[switch_name] = [self.host_set[host_name]]
 
     def iperfPair(self, client, server, bw, num_session, port):
         server_file = "{}_to_{}_server.txt".format(client.name, server.name)
@@ -119,7 +115,7 @@ class Topology( Topo ):
         logging.info("server {} cmd: {}".format(server.name, server_cmd))
         server.cmd(server_cmd)
         client_file = "{}_to_{}_client.txt".format(client.name, server.name)
-        client_cmd = "iperf -c {} -s -u -p {} -u -i 1 -b {}K -t 30 -l 1400 -P {} > {} &".format(server.IP(), port, bw, num_session, client_file)
+        client_cmd = "iperf -c {} -s -u -p {} -u -i 1 -b {}K -t 30 -l 625 -P {} > {} &".format(server.IP(), port, bw, num_session, client_file)
         logging.info("client {} cmd: {}".format(client.name, client_cmd))
         client.cmd(client_cmd)
 
