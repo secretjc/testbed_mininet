@@ -95,6 +95,15 @@ class Rule_handler(object):
             for line in f:
                 if "s" in line:
                     continue
+                if "shutdown" in line:
+                    _, s, t = line.strip().split(' ')           
+                    src_switch_name = 's_{}'.format(s)
+                    src_switch = self.topo.switch_set[src_switch_name]
+                    dst_host_name = 'h_{}'.format(t)
+                    dst_host = self.topo.host_set[dst_host_name]
+                    cmd = "-O {} add-flow".format(OPENFLOW_PROTO)
+                    parameters = "table=0,ip,ip_dst={},eth_type=0x800,actions=drop".format(dst_host.IP())
+                    rules_set[src_switch].append((cmd, parameters))
                 tunnel_num, s, t, weight = line.strip().split(' ')
                 #if int(weight) == 0:
                 #    continue
