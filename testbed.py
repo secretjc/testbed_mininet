@@ -35,11 +35,11 @@ class Testbed(object):
         self.topo = Topology(configs)
         if is_cluster:
             servers = [ 'localhost', 
-                        'ms0744.utah.cloudlab.us',
-                        'ms0735.utah.cloudlab.us',
-                        'ms0724.utah.cloudlab.us',
-                        'ms0702.utah.cloudlab.us',
-                        'ms0712.utah.cloudlab.us' ]
+                        'ms0216.utah.cloudlab.us',
+                        'ms0226.utah.cloudlab.us',
+                        'ms0235.utah.cloudlab.us',
+                        'ms0202.utah.cloudlab.us',
+                        'ms0242.utah.cloudlab.us' ]
             self.net = MininetCluster( topo=self.topo, 
                                    servers=servers, 
                                    switch=RemoteOVSSwitch, 
