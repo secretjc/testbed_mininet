@@ -138,7 +138,7 @@ class Topology( Topo ):
         logging.info("server {} cmd: {}".format(server.name, server_cmd))
         server.cmd(server_cmd)
         client_file = "{}_to_{}_client.txt".format(client.name, server.name)
-        client_cmd = "iperf -c {} -s -u -p {} -u -i 1 -b {}K -t 30 -l 625 -P {} > {} &".format(server.IP(), port, bw, num_session, client_file)
+        client_cmd = "iperf -c {} -s -u -p {} -u -i 1 -b {}K -t 30 -l 125 -P {} > {} &".format(server.IP(), port, bw, num_session, client_file)
         logging.info("client {} cmd: {}".format(client.name, client_cmd))
         client.cmd(client_cmd)
 
