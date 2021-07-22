@@ -1,6 +1,7 @@
 import logging
 from constants import *
 from collections import defaultdict
+from multiprocessing import Process
 
 class Rule_handler(object):
     """
@@ -19,8 +20,13 @@ class Rule_handler(object):
         logging.info("\tImplementing rules: {} ...".format(rule_name))
         #TODO: make it multiprocessing
         rules_set = self.rules[rule_name]
+        process_list = []
         for switch in rules_set:
-            self._implement_switch_rules(switch, rules_set[switch])
+            p = Process(target=self._implement_switch_rules, args=(switch, rules_set[switch]))
+            process_list.append(p)
+            p.start()
+        for p in process_list:
+            p.join()
 
     def configure_tunnels(self, tunnel_file, rule_name):
         logging.info("\tConfiguring tunnels...")
