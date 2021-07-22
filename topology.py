@@ -152,6 +152,8 @@ class Topology( Topo ):
                 if 's' in line:
                     continue
                 src, dst, dm = line.strip().split()
+                if int(dm) * self.scale < 1:
+                    continue
                 session = 1 #int(float(dm) / bw)
                 sd_pair.append((self.host_set[src],
                                 self.host_set[dst],
