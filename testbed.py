@@ -58,7 +58,7 @@ class Testbed(object):
                                listenPort=6631)
         self.rule_handler = Rule_handler(self.topo)
         self.topo.getNetInfo(self.net)
-        self.wait_for_stable = 3
+        self.wait_for_stable = 5
         try:
             #self.net.build()
             self.net.start()
@@ -87,6 +87,7 @@ class Testbed(object):
         self.rule_handler.configure_initial_split(self.configs['topo_config']['topology']['initial_file'], 'initial')
         self.rule_handler.implement_rules('tunnel')
         self.rule_handler.implement_rules('initial')
+        self.topo.fail_links(self.net)
         time.sleep(self.wait_for_stable)
         #logging.info("Lanuching link failure detector.")
         #self.failure_detector.process.start()
