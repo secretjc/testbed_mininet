@@ -22,6 +22,7 @@ class Topology( Topo ):
         self.scale = 1
         self.base_bw = 500
         self.configs = configs
+        self.failed_links = self._get_failed_links()
         self.host_set = {}
         self.switch_set = {}
         self.graph = defaultdict(set)
@@ -29,15 +30,15 @@ class Topology( Topo ):
         self.hosts_to_switches = {}
         #self.intfs = {}
         #self.nbr_intf = {}
-        self.build_topo(configs)
+        self.build_topo()
         self.hostNum = len(self.host_set)
         self.switchNum = len(self.switch_set)
 
-    def build_topo(self, configs):
+    def build_topo(self):
         """
         Add hosts, switches, links when parsing the file.
         """
-        topo_file = configs['topo_config']['topology']['cap_file']
+        topo_file = self.configs['topo_config']['topology']['cap_file']
         with open(topo_file, 'r') as f:
             for line in f:
                 if line[0] == 'i':
@@ -108,6 +109,28 @@ class Topology( Topo ):
         for switch_name in self.hosts_to_switches:
             host_name = self.hosts_to_switches[switch_name]
             self.hosts_to_switches[switch_name] = [self.host_set[host_name]]
+    
+    def _get_failed_links(self):
+        str_failed_links = self.configs['topo_config']['topology']['failed_links']
+        if "no" in str_failed_links:
+            return []
+        else:
+            link_name_list = self.failed_links.strip().split(‘,’)
+            link_list = []
+            for link in link_name_list:
+                u, v = link.split(‘-’)
+                u = "s_{}".format(u)
+                v = "s_{}".format(v)
+                if u < v:
+                    link_list.append((u,v))
+            return link_list
+        
+    def fail_links(self, net):
+        if len(self.failed_links) == 0:
+            logging.info("No link to fail.")
+        for s1, s2 in self.failed_links:
+            logging.info("Failing link: %s-%s".format(s1, s2))
+            net.configLinkStatus(s1, s2, ‘down’)
 
     def iperfPair(self, client, server, bw, num_session, port):
         server_file = "{}_to_{}_server.txt".format(client.name, server.name)
