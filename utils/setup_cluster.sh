@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-server0=ms0616.utah.cloudlab.us
+server0=ms0621.utah.cloudlab.us
 username=li3566
 
 serverfile=server.txt
@@ -22,7 +22,7 @@ for server in ${serverList[*]}
     ssh ${username}@${server} "
     git clone https://github.com/secretjc/testbed_mininet.git
     cd ~/testbed_mininet
-    # sh utils/config.sh" &
+    sh utils/config.sh" &
 done
 
 wait
