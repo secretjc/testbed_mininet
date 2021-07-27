@@ -14,15 +14,15 @@ rm manifest.txt
 declare -a serverList
 serverList=(`cat "$serverfile"`)
 
-printf "\n\nAdding to known_hosts......\n\n"
+printf "**********************Adding to known_hosts......\n\n"
 for ((x=1; x<${#serverList[@]}; x++));
 do
     echo "${serverList[x]}"
     ./auto_addto_known.exp $username ${serverList[x]}
 done
 
-printf "\n\nSetting up Mininet cluster......\n\n"
-printf "\n\nCloning repo from Github and installing Minime, OpenVSwitch etc..\n\n"
+printf "**********************Setting up Mininet cluster......\n\n"
+printf "**********************Cloning repo from Github and installing Minime, OpenVSwitch etc..\n\n"
 for server in ${serverList[*]}
     do
     echo "$server"
@@ -34,7 +34,7 @@ done
 
 wait
 
-printf "\n\nChanging passwords and ssh configurations for each node......\n\n"
+printf "**********************Changing passwords and ssh configurations for each node......\n\n"
 for server in ${serverList[*]}
     do
     echo "$server"
@@ -48,9 +48,11 @@ EOF
     sudo scp testbed_mininet/other_files/sudoers /etc/sudoers"
 done
 
-printf "\n\nGenerating a pair of shared ssh-key and populating it into each node......\n\n"
+printf "**********************Generating a pair of shared ssh-key and populating it into each node......\n\n"
 echo ${server0}
 ./auto_send_reply.exp ${username} ${server0} "${serverList[*]}"
 
-printf "\n\nDone with setting up Mininet cluster.\n\n"
-echo "Reday to start the experiment."
+printf "**********************Done with setting up Mininet cluster.\n\n"
+printf "**********************Generating _config/main.yaml and changing servers in topology.py\n\n"
+python add_hname_to_config.py --main_config ../_config/main.yaml --server_file ./server.txt
+echo "**********************Reday to start the experiment."
