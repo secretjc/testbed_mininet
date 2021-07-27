@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-server0=ms0616.utah.cloudlab.us
-username=li3566
+server0=ms0632.utah.cloudlab.us
+username=secretjc
 
 serverfile=server.txt
 
