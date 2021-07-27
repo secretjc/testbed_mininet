@@ -32,7 +32,7 @@ Multiple scenarios automation
 
 
 Set up mininet cluster on Cloudlab:
-1. Change utils/server.txt into hostnames of nodes on Cloudlab
-2. Change utils/setup_cluster.sh line 7 username into your Cloudlab username
+1. Change utils/setup_cluster.sh line 3:server0 into Cloudlab's node_0 hostname
+2. Change utils/setup_cluster.sh line 4:username into your Cloudlab username
 3. cd utils
 4. run ./setup_cluster.sh

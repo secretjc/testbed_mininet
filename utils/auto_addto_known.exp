@@ -1,0 +1,11 @@
+#!/usr/bin/expect -f
+
+
+set username [lindex $argv 0]
+set server [lindex $argv 1]
+
+spawn ssh $username@$server "ls &> /dev/null"
+expect {
+    "*)? " {send -- "yes\r"}
+}
+interact

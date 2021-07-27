@@ -14,6 +14,13 @@ rm manifest.txt
 declare -a serverList
 serverList=(`cat "$serverfile"`)
 
+printf "\n\nAdding to known_hosts......\n\n"
+for ((x=1; x<${#serverList[@]}; x++));
+do
+    echo "${serverList[x]}"
+    ./auto_addto_known.exp $username ${serverList[x]}
+done
+
 printf "\n\nSetting up Mininet cluster......\n\n"
 printf "\n\nCloning repo from Github and installing Minime, OpenVSwitch etc..\n\n"
 for server in ${serverList[*]}
@@ -21,8 +28,8 @@ for server in ${serverList[*]}
     echo "$server"
     ssh ${username}@${server} "
     git clone https://github.com/secretjc/testbed_mininet.git
-    cd ~/testbed_mininet
-    sh utils/config.sh" &
+    cd ~/testbed_mininet"
+    # sh utils/config.sh" &
 done
 
 wait
