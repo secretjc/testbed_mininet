@@ -115,7 +115,7 @@ class Topology( Topo ):
         if "no" in str_failed_links:
             return []
         else:
-            link_name_list = self.failed_links.strip().split(',')
+            link_name_list = str_failed_links.strip().split(',')
             link_list = []
             for link in link_name_list:
                 u, v = link.split('-')
