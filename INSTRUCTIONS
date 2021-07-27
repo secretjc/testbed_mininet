@@ -29,3 +29,10 @@ Multiple scenarios automation
 4. cleanup mininet ('sudo mn -c' run on all servers)
 5. collect all iperf output files from all servers
 (6. transfer files to local server)
+
+
+Set up mininet cluster on Cloudlab:
+1. Change utils/server.txt into hostnames of nodes on Cloudlab
+2. Change utils/setup_cluster.sh line 7 username into your Cloudlab username
+3. cd utils
+4. run ./setup_cluster.sh

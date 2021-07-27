@@ -1,0 +1,26 @@
+#!/usr/bin/expect -f
+
+
+set username [lindex $argv 0]
+set server0 [lindex $argv 1]
+set serverList [lindex $argv 2]
+
+puts $serverList
+
+set fields [open "server.txt" r]
+set ipname [gets $fields]
+set ipname [gets $fields]
+
+spawn ssh -t $username@$server0 "
+cd ~/mininet/util
+./clustersetup.sh -p $serverList"
+expect "*(yes/no)? "
+send -- "yes\r"
+while {[string length $ipname] > 0} {
+    expect "*(yes/no)? "
+    send -- "yes\r"
+    expect "password: "
+    send -- "111111\r"
+    set ipname [gets $fields]
+}
+interact
