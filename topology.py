@@ -115,10 +115,10 @@ class Topology( Topo ):
         if "no" in str_failed_links:
             return []
         else:
-            link_name_list = self.failed_links.strip().split(‘,’)
+            link_name_list = str_failed_links.strip().split(',')
             link_list = []
             for link in link_name_list:
-                u, v = link.split(‘-’)
+                u, v = link.split('-')
                 u = "s_{}".format(u)
                 v = "s_{}".format(v)
                 if u < v:
@@ -130,7 +130,7 @@ class Topology( Topo ):
             logging.info("No link to fail.")
         for s1, s2 in self.failed_links:
             logging.info("Failing link: %s-%s".format(s1, s2))
-            net.configLinkStatus(s1, s2, ‘down’)
+            net.configLinkStatus(s1, s2, 'down')
 
     def iperfPair(self, client, server, bw, num_session, port):
         server_file = "{}_to_{}_server.txt".format(client.name, server.name)
