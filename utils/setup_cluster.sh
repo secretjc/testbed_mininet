@@ -1,10 +1,18 @@
 #!/usr/bin/env bash
 
+server0=ms0616.utah.cloudlab.us
+username=li3566
+
 serverfile=server.txt
+
+ssh ${username}@${server0} "
+    geni-get manifest > manifest.txt"
+scp ${username}@${server0}:~/manifest.txt ./
+grep -i "hostname=" manifest.txt | sed -e 's/.*hostname="\(.*\)" p.*/\1/g' > $serverfile
+rm manifest.txt
+
 declare -a serverList
 serverList=(`cat "$serverfile"`)
-server0=${serverList[0]}
-username=li3566
 
 printf "\n\nSetting up Mininet cluster......\n\n"
 printf "\n\nCloning repo from Github and installing Minime, OpenVSwitch etc..\n\n"
