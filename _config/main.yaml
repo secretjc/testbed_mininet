@@ -1,4 +1,5 @@
 main:
-  log_level: 'INFO'
-  log_file: 'main_log.txt'
-  is_cluster: True #False
+  is_cluster: true
+  log_file: main_log.txt
+  log_level: INFO
+  servers: [localhost, ms0638.utah.cloudlab.us, ms0619.utah.cloudlab.us]
