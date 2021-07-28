@@ -1,0 +1,9 @@
+topology:
+  cap_file: './_data/capa.tab'
+  tunnel_file: './_data/tunnel.tab'
+  initial_file: './_data/initial.tab'
+  demand_file: './_data/demand.tab'
+  failed_links: 'no' #'2-9,9-2'
+demand:
+  bw: 0.2
+  demand_file: './_data/demand.tab'
