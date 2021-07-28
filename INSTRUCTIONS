@@ -23,7 +23,9 @@ For cluster run on cloudlab:
 8. Run sudo python main.py --main_config ./_config/main.yaml --topo_config ./_config/topo_toy.yaml in first machine
 
 Multiple scenarios automation
-1. start mininet with failed link (generate topology configure file according to the failed link)
+- Read the scenario file, generate a config file for each scenario.
+- Read the scenario file, loop over all scenarios to do the following:
+1. start mininet with the corresponding config file (e.g. python main.py --main_config ./_config/main.yaml --topo_config ./_config/scenario_0.yaml)
 2. wait until all iperf done
 3. stop mininet
 4. cleanup mininet ('sudo mn -c' run on all servers)
