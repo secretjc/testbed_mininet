@@ -28,8 +28,8 @@ for server in ${serverList[*]}
     echo "$server"
     ssh ${username}@${server} "
     git clone https://github.com/secretjc/testbed_mininet.git
-    cd ~/testbed_mininet"
-    # sh utils/config.sh" &
+    cd ~/testbed_mininet
+    sh utils/config.sh" &
 done
 
 wait
@@ -55,4 +55,4 @@ echo ${server0}
 printf "**********************Done with setting up Mininet cluster.\n\n"
 printf "**********************Generating _config/main.yaml and changing servers in topology.py\n\n"
 python add_hname_to_config.py --main_config ../_config/main.yaml --server_file ./server.txt
-echo "**********************Reday to start the experiment."
+echo "**********************Ready to start the experiment."
