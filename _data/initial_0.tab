@@ -1,4 +1,4 @@
-tunnel_num s t weight
+tunnel_num s t weight -no
 162 0 1 100
 411 0 2 78
 413 0 2 21
