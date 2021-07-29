@@ -134,11 +134,11 @@ class Topology( Topo ):
 
     def iperfPair(self, client, server, bw, num_session, port):
         server_file = "{}_to_{}_server.txt".format(client.name, server.name)
-        server_cmd = "iperf -s -u -p {} -i 1 > {} &".format(port, server_file)
+        server_cmd = "iperf -s -u -p {} -f b -i 1 > {} &".format(port, server_file)
         logging.info("server {} cmd: {}".format(server.name, server_cmd))
         server.cmd(server_cmd)
         client_file = "{}_to_{}_client.txt".format(client.name, server.name)
-        client_cmd = "iperf -c {} -s -u -p {} -u -i 1 -b {}K -t 30 -l 125 -P {} > {} &".format(server.IP(), port, bw, num_session, client_file)
+        client_cmd = "iperf -c {} -s -u -p {} -u -i 1 -b {}K -t 30 -l 125 -f b -P {} > {} &".format(server.IP(), port, bw, num_session, client_file)
         logging.info("client {} cmd: {}".format(client.name, client_cmd))
         client.cmd(client_cmd)
 
