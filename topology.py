@@ -22,7 +22,7 @@ class Topology( Topo ):
         self.scale = 1
         self.base_bw = 500
         self.pkt_size = 1000
-        self.kbit_per_pkt = self.pkt_size * 8 / 1000
+        self.kbit_per_pkt = self.pkt_size * 8 / 1000.0
         self.configs = configs
         self.failed_links = self._get_failed_links()
         self.host_set = {}
