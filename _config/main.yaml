@@ -2,4 +2,4 @@ main:
   is_cluster: true
   log_file: main_log.txt
   log_level: INFO
-  servers: [localhost, ms0237.utah.cloudlab.us, ms0205.utah.cloudlab.us, ms0239.utah.cloudlab.us, ms0217.utah.cloudlab.us, ms0220.utah.cloudlab.us]
+  servers: [localhost, ms0208.utah.cloudlab.us, ms0217.utah.cloudlab.us, ms0218.utah.cloudlab.us, ms0243.utah.cloudlab.us, ms0242.utah.cloudlab.us]
