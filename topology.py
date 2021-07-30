@@ -131,7 +131,7 @@ class Topology( Topo ):
         if len(self.failed_links) == 0:
             logging.info("No link to fail.")
         for s1, s2 in self.failed_links:
-            logging.info("Failing link: %s-%s".format(s1, s2))
+            logging.info("Failing link: {}-{}".format(s1, s2))
             net.configLinkStatus(s1, s2, 'down')
 
     def iperfPair(self, client, server, bw, num_session, port):
