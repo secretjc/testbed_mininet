@@ -21,6 +21,8 @@ class Topology( Topo ):
         # Numbering:  h0,h1,h2, s0,s1,s2
         self.scale = 1
         self.base_bw = 500
+        self.pkt_size = 1000
+        self.kbit_per_pkt = self.pkt_size * 8 / 1000
         self.configs = configs
         self.failed_links = self._get_failed_links()
         self.host_set = {}
@@ -138,7 +140,7 @@ class Topology( Topo ):
         logging.info("server {} cmd: {}".format(server.name, server_cmd))
         server.cmd(server_cmd)
         client_file = "{}_to_{}_client.txt".format(client.name, server.name)
-        client_cmd = "iperf -c {} -s -u -p {} -u -i 1 -b {}K -t 30 -l 125 -f b -P {} > {} &".format(server.IP(), port, bw, num_session, client_file)
+        client_cmd = "iperf -c {} -s -u -p {} -u -i 1 -b {}K -t 30 -l {} -f b -P {} > {} &".format(server.IP(), port, bw, self.pkt_size, num_session, client_file)
         logging.info("client {} cmd: {}".format(client.name, client_cmd))
         client.cmd(client_cmd)
 
@@ -152,8 +154,8 @@ class Topology( Topo ):
                 if 's' in line:
                     continue
                 src, dst, dm = line.strip().split()
-                if int(dm) * self.scale < 1:
-                    continue
+                if int(dm) * self.scale / self.kbit_per_pkt < 2:
+                    dm = 2 * self.kbit_per_pkt / self.scale
                 session = 1 #int(float(dm) / bw)
                 sd_pair.append((self.host_set[src],
                                 self.host_set[dst],
