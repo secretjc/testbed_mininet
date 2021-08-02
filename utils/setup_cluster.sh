@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-server0=ms0626.utah.cloudlab.us
+server0=ms0939.utah.cloudlab.us
 username=li3566
 
 serverfile=server.txt
@@ -56,9 +56,11 @@ printf "**********************Done with setting up Mininet cluster.\n\n"
 printf "**********************Generating _config/main.yaml.\n\n"
 python add_hname_to_config.py --main_config ../_config/main.yaml --server_file ./server.txt
 printf "**********************Generating _config/scenario_{#}.yaml.\n\n"
-python create_scenario.py ----scenario_file ../_data/scenario_example.tab --scenario_template ../_config/scenario_template.yaml
+python create_scenario.py --scenario_file ../_data/scenario_ibm.tab --scenario_template ../_config/scenario_template.yaml
 printf "**********************Copying _config _data to node 0.\n\n"
 scp -r ../_config ${username}@${host_0}:~/testbed_mininet/
+# scp -r ../_config li3566@ms0939.utah.cloudlab.us:~/testbed_mininet/
 scp -r ../_data ${username}@${host_0}:~/testbed_mininet/
+scp -r server.txt ${username}@${host_0}:~/testbed_mininet/utils/
 echo "**********************Ready to start the experiment."
 echo 'ssh to node 0 and run testbed_mininet/run_all.sh'
