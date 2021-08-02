@@ -3,7 +3,7 @@ import argparse
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--scenario_file', default='../_data/scenario_example.tab',
+    parser.add_argument('--scenario_file', default='../_data/scenario_ibm.tab',
                         help='scenario file')
     parser.add_argument('--scenario_template', default='../_config/scenario_template.yaml',
                         help='scenario template')
@@ -21,7 +21,7 @@ if __name__ == '__main__':
         scenario_template = yaml.safe_load(f)
     for key in scenario_dic.keys():
         out_file = '../_config/scenario_{}.yaml'.format(key)
-        initial_file =  './_data/initial_{}.tab'.format(key)
+        initial_file =  './_data/initial_split/initial_{}.tab'.format(key)
         dump_scenario = scenario_template.copy()
         dump_scenario['topology']['failed_links'] = scenario_dic[key]
         dump_scenario['topology']['initial_file'] = initial_file
