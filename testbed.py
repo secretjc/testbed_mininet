@@ -88,16 +88,19 @@ class Testbed(object):
         #self.failure_detector.process.start()
         self.topo.testThroughput()
         
-        cli = CLI(self.net)
-        try:
-            cli.run()
-            self._start_simulation()
-        except KeyboardInterrupt:
-            logging.error("CLI interrupted by keyboard.")
-            self._clean_up()
-        except:
-            logging.error("Unexpected exception catched.")
-            self._clean_up()
+        time.sleep(32)
+        #cli = CLI(self.net)
+        #try:
+        #    cli.run()
+        #    self._start_simulation()
+        #except KeyboardInterrupt:
+        #    logging.error("CLI interrupted by keyboard.")
+        #    self._clean_up()
+        #except:
+        #    logging.error("Unexpected exception catched.")
+        #    self._clean_up()
+        
+        self._clean_up()
 
     def _start_simulation(self):
         pass
