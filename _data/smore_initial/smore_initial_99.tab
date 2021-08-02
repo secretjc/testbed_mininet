@@ -1,0 +1,42 @@
+tunnel_num s t weight
+shutdown 0 1
+shutdown 0 2
+shutdown 0 3
+shutdown 0 4
+shutdown 0 5
+shutdown 0 6
+shutdown 0 7
+shutdown 0 8
+shutdown 0 9
+shutdown 0 10
+shutdown 0 11
+shutdown 0 12
+shutdown 0 13
+shutdown 0 14
+shutdown 0 15
+shutdown 0 16
+shutdown 1 0
+shutdown 2 0
+540 2 3 100
+shutdown 3 0
+99 3 2 100
+783 3 8 100
+shutdown 4 0
+795 4 3 100
+shutdown 5 0
+561 5 3 100
+shutdown 6 0
+60 6 7 100
+shutdown 7 0
+69 7 6 100
+195 7 8 100
+shutdown 8 0
+366 8 3 100
+shutdown 9 0
+shutdown 10 0
+shutdown 11 0
+shutdown 12 0
+shutdown 13 0
+shutdown 14 0
+shutdown 15 0
+shutdown 16 0
