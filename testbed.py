@@ -99,6 +99,8 @@ class Testbed(object):
         #except:
         #    logging.error("Unexpected exception catched.")
         #    self._clean_up()
+        
+        self._clean_up()
 
     def _start_simulation(self):
         pass
