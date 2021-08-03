@@ -1,3 +1,4 @@
 *.pyc
 *.txt
 _config/*
+.DS_Store
