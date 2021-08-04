@@ -35,6 +35,7 @@ class Topology( Topo ):
         self.build_topo()
         self.hostNum = len(self.host_set)
         self.switchNum = len(self.switch_set)
+        self.throttle_pair = {}
 
     def build_topo(self):
         """
@@ -154,6 +155,8 @@ class Topology( Topo ):
                 if 's' in line:
                     continue
                 src, dst, dm = line.strip().split()
+                if (src, dst) in self.throttle_pair:
+                    dm = float(dm) * (1 - self.throttle_pair[src, dst])
                 if int(dm) * self.scale / self.kbit_per_pkt < 2:
                     dm = 2 * self.kbit_per_pkt / self.scale
                 session = 1 #int(float(dm) / bw)
