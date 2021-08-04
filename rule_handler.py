@@ -95,6 +95,12 @@ class Rule_handler(object):
             for line in f:
                 if "s" in line:
                     continue
+                if "throttle" in line:
+                    _, s, t, loss = line.strip().split(' ')
+                    src_host_name = 'h_{}'.format(s)
+                    dst_host_name = 'h_{}'.format(t)
+                    self.topo.throttle_pair[src_host_name, dst_host_name] = float(loss)
+                    continue
                 if "shutdown" in line:
                     _, s, t = line.strip().split(' ')           
                     src_switch_name = 's_{}'.format(s)
@@ -104,6 +110,7 @@ class Rule_handler(object):
                     cmd = "-O {} add-flow".format(OPENFLOW_PROTO)
                     parameters = "table=0,ip,ip_dst={},eth_type=0x800,actions=drop".format(dst_host.IP())
                     rules_set[src_switch].append((cmd, parameters))
+                    continue
                 tunnel_num, s, t, weight = line.strip().split(' ')
                 #if int(weight) == 0:
                 #    continue
