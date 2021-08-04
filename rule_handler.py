@@ -93,7 +93,7 @@ class Rule_handler(object):
         groups_info = {}
         with open(initial_file, 'r') as f:
             for line in f:
-                if "s" in line:
+                if "s" in line and "shutdown" not in line:
                     continue
                 if "throttle" in line:
                     _, s, t, loss = line.strip().split(' ')
