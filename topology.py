@@ -23,6 +23,7 @@ class Topology( Topo ):
         self.base_bw = 500
         self.pkt_size = 1000
         self.kbit_per_pkt = self.pkt_size * 8 / 1000.0
+        self.is_2class = configs['main_config']['main']['is_2class']
         self.configs = configs
         self.failed_links = self._get_failed_links()
         self.host_set = {}
@@ -63,20 +64,37 @@ class Topology( Topo ):
                     switch_name = 's_{}'.format(node)
                     s = self.addSwitch(switch_name)
                     self.switch_set[switch_name] = s
-
-                    # Add 1 host
-                    host_name = 'h_{}'.format(node)
-                    h = self.addHost(host_name)
-                    self.host_set[host_name] = h
-                    self.hosts_to_switches[switch_name] = host_name
-
-                    # Connect the host and switch.
-                    # Caveat: Setting port number as 0 causes problems
-                    # in mininet.
+                    
                     linkopts = dict(bw=self.base_bw * self.scale)
-                    l = self.addLink(h, s, port1=1, port2=1, **linkopts)
-                    self.switch_ports[switch_name] = {host_name: 1}
-                    #self.intfs[l.intf2] = (s, h)
+                    
+                    if self.is_2class:    
+                        # Add 2 hosts (for high and low priority)
+                        host_name_high = 'hh_{}'.format(node)
+                        host_name_low = 'hl_{}'.format(node)
+                        h_high = self.addHost(host_name_high)
+                        h_low = self.addHost(host_name_low)
+                        self.host_set[host_name_high] = h_high
+                        self.host_set[host_name_low] = h_low
+                        self.hosts_to_switches[switch_name] = (host_name_high, host_name_low)
+                        
+                        # Connect the host and switch.
+                        # Caveat: Setting port number as 0 causes problems
+                        # in mininet.
+                        l_high = self.addLink(h_high, s, port1=1, port2=1, **linkopts)
+                        l_low = self.addLink(h_low, s, port1=1, port2=2, **linkopts)
+                        self.switch_ports[switch_name] = {host_name_high: 1, host_name_low: 2}
+                        #self.intfs[l.intf2] = (s, h)
+                    else:
+                        # Add 1 host
+                        host_name = 'h_{}'.format(node)
+                        h = self.addHost(host_name)
+                        self.host_set[host_name] = h
+                        self.hosts_to_switches[switch_name] = host_name
+
+                        # Connect the host and switch.
+                        l = self.addLink(h, s, port1=1, port2=1, **linkopts)
+                        self.switch_ports[switch_name] = {host_name: 1}
+                        #self.intfs[l.intf2] = (s, h)
 
                 # Add links between src and dst switches.
                 src_switch = 's_{}'.format(src)
@@ -110,8 +128,12 @@ class Topology( Topo ):
         for host_name in self.host_set:
             self.host_set[host_name] = net.getNodeByName(host_name)
         for switch_name in self.hosts_to_switches:
-            host_name = self.hosts_to_switches[switch_name]
-            self.hosts_to_switches[switch_name] = [self.host_set[host_name]]
+            if self.is_2class:
+                host_name_high, host_name_low = self.hosts_to_switches[switch_name]
+                self.hosts_to_switches[switch_name] = [self.host_set[host_name_high], self.host_set[host_name_low]]
+            else:
+                host_name = self.hosts_to_switches[switch_name]
+                self.hosts_to_switches[switch_name] = [self.host_set[host_name]]                  
     
     def _get_failed_links(self):
         str_failed_links = self.configs['topo_config']['topology']['failed_links']
