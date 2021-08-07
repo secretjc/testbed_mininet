@@ -45,7 +45,6 @@ if __name__ == '__main__':
     log_level = configs['main_config']['main']['log_level']
     log_file = configs['main_config']['main']['log_file']
     is_cluster = configs['main_config']['main']['is_cluster']
-    is_2class = configs['main_config']['main']['is_2class']
     logging.basicConfig(
         level=log_level, filename=log_file, filemode='w',
         format="[%(asctime)s] [%(levelname)7s] %(message)s (%(filename)s:%(lineno)s)")
@@ -55,4 +54,4 @@ if __name__ == '__main__':
     logging.getLogger('').addHandler(console)
 
     # Start testbed
-    testbed.Testbed(configs, is_cluster, is_2class).start()
+    testbed.Testbed(configs, is_cluster).start()
