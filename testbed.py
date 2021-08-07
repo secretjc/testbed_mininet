@@ -79,7 +79,10 @@ class Testbed(object):
 
     def start(self):
         self.rule_handler.configure_tunnels(self.configs['topo_config']['topology']['tunnel_file'], 'tunnel')
-        self.rule_handler.configure_initial_split(self.configs['topo_config']['topology']['initial_file'], 'initial')
+        if self.topo.is_2class:  
+            self.rule_handler.configure_initial_split_2class(self.configs['topo_config']['topology']['initial_file'], 'initial')
+        else:
+            self.rule_handler.configure_initial_split_1class(self.configs['topo_config']['topology']['initial_file'], 'initial')
         self.rule_handler.implement_rules('tunnel')
         self.rule_handler.implement_rules('initial')
         self.topo.fail_links(self.net)
