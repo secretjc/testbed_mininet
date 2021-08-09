@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-server0=ms0939.utah.cloudlab.us
+server0=ms0322.utah.cloudlab.us
 username=li3566
 
 serverfile=./utils/server.txt

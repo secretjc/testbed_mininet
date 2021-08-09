@@ -1,3 +1,6 @@
-ms0626.utah.cloudlab.us
-ms0632.utah.cloudlab.us
-ms0612.utah.cloudlab.us
+ms0322.utah.cloudlab.us
+ms0319.utah.cloudlab.us
+ms0325.utah.cloudlab.us
+ms0326.utah.cloudlab.us
+ms0336.utah.cloudlab.us
+ms0301.utah.cloudlab.us

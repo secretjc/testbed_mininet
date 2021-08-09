@@ -6,5 +6,5 @@ echo $scenario_num
 
 for i in "${scenario_num[@]}"
 do
-    python2 parse_iperf.py ../ibm_scenario_${i} > ../loss/ibm_${i}_loss.txt
+    python2 parse_iperf.py ../ibm_scenario_${i} > ../loss_2/ibm_${i}_loss.txt
 done

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-server0=ms0626.utah.cloudlab.us
+server0=ms0322.utah.cloudlab.us
 username=li3566
 
 serverfile=./utils/server.txt
@@ -19,7 +19,8 @@ mkdir iperf_results
 "
 
 
-for i in "${scenario_num[@]}"
+# for i in "${scenario_num[@]}"
+for (( i=54; i<=138; i++ ))
 do
     ssh -t ${username}@${server0} "
     cd ~/testbed_mininet
@@ -43,6 +44,7 @@ do
     do
         echo "$server"
         ssh ${username}@${server} "
-        sudo mn -c"
+        sudo mn -c" &
     done
+    
 done
