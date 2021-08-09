@@ -3,9 +3,4 @@ main:
   is_2class: false
   log_file: main_log.txt
   log_level: INFO
-<<<<<<< Updated upstream
-  servers: [localhost, ms0319.utah.cloudlab.us, ms0325.utah.cloudlab.us, ms0326.utah.cloudlab.us,
-    ms0336.utah.cloudlab.us, ms0301.utah.cloudlab.us]
-=======
   servers: [localhost, ms0632.utah.cloudlab.us, ms0612.utah.cloudlab.us]
->>>>>>> Stashed changes
