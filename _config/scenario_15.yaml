@@ -1,9 +1,0 @@
-demand:
-  bw: 0.2
-  demand_file: ./_data/demand.tab
-topology:
-  cap_file: ./_data/capa.tab
-  demand_file: ./_data/demand.tab
-  failed_links: 6-7,7-6
-  initial_file: ./_data/initial_split/initial_15.tab
-  tunnel_file: ./_data/tunnel.tab
