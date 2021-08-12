@@ -2,3 +2,4 @@
 *.txt
 _config/*
 .DS_Store
+iperf_results/*

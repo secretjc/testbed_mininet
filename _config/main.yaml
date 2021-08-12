@@ -1,6 +1,6 @@
 main:
-  is_cluster: true
   is_2class: false
+  is_cluster: true
   log_file: main_log.txt
   log_level: INFO
-  servers: [localhost, ms0632.utah.cloudlab.us, ms0612.utah.cloudlab.us]
+  servers: [localhost, ms0702.utah.cloudlab.us, ms0744.utah.cloudlab.us]
