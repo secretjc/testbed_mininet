@@ -5,6 +5,7 @@ tunnel_num s t prio weight
 822 0 2 l 100
 822 0 2 h 100
 shutdown 0 3 l
+1344 0 3 h 100
 174 0 4 l 100
 shutdown 0 4 h
 689 0 5 l 100
@@ -21,11 +22,13 @@ shutdown 0 4 h
 61 0 10 l 82
 62 0 10 h 100
 shutdown 0 11 l
+shutdown 0 11 h
 1073 0 12 l 100
 shutdown 0 12 h
 1565 0 13 l 100
 shutdown 0 13 h
 shutdown 0 14 l
+428 0 14 h 100
 930 0 15 l 100
 930 0 15 h 100
 1315 0 16 l 100
@@ -131,6 +134,7 @@ shutdown 3 15 h
 600 4 1 l 100
 600 4 1 h 100
 shutdown 4 2 l
+1098 4 2 h 100
 1590 4 3 l 100
 1592 4 3 h 55
 1590 4 3 h 44
@@ -139,14 +143,21 @@ shutdown 4 2 l
 744 4 6 l 100
 744 4 6 h 100
 shutdown 4 7 l
+1254 4 7 h 100
 850 4 8 l 100
 847 4 8 h 100
 shutdown 4 9 l
+1374 4 9 h 100
 shutdown 4 10 l
+193 4 10 h 100
 shutdown 4 11 l
+shutdown 4 11 h
 shutdown 4 12 l
+shutdown 4 12 h
 shutdown 4 13 l
+954 4 13 h 100
 shutdown 4 14 l
+1484 4 14 h 100
 349 4 15 l 100
 348 4 15 h 100
 253 4 16 l 100
@@ -175,7 +186,9 @@ shutdown 4 14 l
 225 5 11 l 100
 223 5 11 h 100
 shutdown 5 12 l
+1398 5 12 h 100
 shutdown 5 13 l
+876 5 13 h 100
 366 5 14 l 100
 366 5 14 h 100
 1501 5 15 l 100
@@ -252,9 +265,11 @@ shutdown 7 12 h
 1395 8 1 l 100
 1394 8 1 h 100
 shutdown 8 2 l
+shutdown 8 2 h
 735 8 3 l 100
 shutdown 8 3 h
 shutdown 8 4 l
+1243 8 4 h 100
 86 8 5 l 100
 86 8 5 h 100
 598 8 6 l 100
@@ -272,6 +287,7 @@ shutdown 8 9 h
 842 8 13 l 100
 842 8 13 h 100
 shutdown 8 14 l
+1370 8 14 h 100
 188 8 15 l 100
 188 8 15 h 100
 993 8 16 l 100
@@ -299,7 +315,9 @@ shutdown 9 8 h
 967 9 11 l 100
 shutdown 9 11 h
 shutdown 9 12 l
+shutdown 9 12 h
 shutdown 9 13 l
+727 9 13 h 100
 214 9 14 l 100
 211 9 14 h 100
 1391 9 15 l 100
@@ -309,23 +327,31 @@ shutdown 9 13 l
 985 10 0 l 100
 985 10 0 h 100
 shutdown 10 1 l
+1506 10 1 h 100
 shutdown 10 2 l
+1627 10 2 h 100
 493 10 3 l 100
 shutdown 10 3 h
 shutdown 10 4 l
+637 10 4 h 100
 1135 10 5 l 100
 1136 10 5 h 100
 shutdown 10 6 l
+1290 10 6 h 100
 shutdown 10 7 l
+shutdown 10 7 h
 102 10 8 l 100
 102 10 8 h 100
 shutdown 10 9 l
+606 10 9 h 100
 1260 10 11 l 100
 1260 10 11 h 100
 shutdown 10 12 l
+1404 10 12 h 100
 234 10 13 l 100
 234 10 13 h 100
 shutdown 10 14 l
+372 10 14 h 100
 883 10 15 l 100
 883 10 15 h 100
 1170 10 16 l 100
@@ -365,15 +391,23 @@ shutdown 11 3 h
 1163 12 0 l 100
 shutdown 12 0 h
 shutdown 12 1 l
+shutdown 12 1 h
 shutdown 12 2 l
+shutdown 12 2 h
 shutdown 12 3 l
+shutdown 12 3 h
 shutdown 12 4 l
+799 12 4 h 100
 shutdown 12 5 l
+1308 12 5 h 100
 shutdown 12 6 l
+shutdown 12 6 h
 shutdown 12 7 l
+654 12 7 h 100
 408 12 8 l 100
 408 12 8 h 100
 shutdown 12 9 l
+shutdown 12 9 h
 1434 12 10 l 100
 1434 12 10 h 100
 282 12 11 l 48
@@ -383,14 +417,17 @@ shutdown 12 9 l
 540 12 13 l 90
 540 12 13 h 100
 shutdown 12 14 l
+shutdown 12 14 h
 1542 12 15 l 100
 1542 12 15 h 100
 shutdown 12 16 l
+1339 12 16 h 100
 407 13 0 l 100
 403 13 0 h 100
 1539 13 1 l 100
 1536 13 1 h 100
 shutdown 13 2 l
+shutdown 13 2 h
 535 13 3 l 100
 shutdown 13 3 h
 38 13 4 l 100
@@ -400,9 +437,11 @@ shutdown 13 4 h
 683 13 6 l 100
 680 13 6 h 100
 shutdown 13 7 l
+shutdown 13 7 h
 1334 13 8 l 100
 1334 13 8 h 100
 shutdown 13 9 l
+818 13 9 h 100
 312 13 10 l 100
 312 13 10 h 100
 1440 13 11 l 100
@@ -441,6 +480,7 @@ shutdown 13 16 h
 1530 14 11 l 100
 1530 14 11 h 100
 shutdown 14 12 l
+792 14 12 h 100
 1302 14 13 l 100
 1302 14 13 h 100
 276 14 15 l 100
