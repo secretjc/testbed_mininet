@@ -22,7 +22,7 @@ if __name__ == '__main__':
     for key in scenario_dic.keys():
         out_file = '../_config/scenario_{}.yaml'.format(key)
         # initial_file =  './_data/initialsq/initialsq_{}.tab'.format(key)
-        initial_file =  './_data/initial_split/initial_{}.tab'.format(key)
+        initial_file =  './_data/initial_2class/initial_2class_{}.tab'.format(key)
         dump_scenario = scenario_template.copy()
         dump_scenario['topology']['failed_links'] = scenario_dic[key]
         dump_scenario['topology']['initial_file'] = initial_file

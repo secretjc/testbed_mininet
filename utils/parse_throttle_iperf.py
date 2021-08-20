@@ -1,7 +1,8 @@
 import sys
 import os.path
+import csv
 
-"Usage: python parse_iperf.py scenario_file folder_prefix initial_prefix"
+"Usage: python parse_throttle_iperf.py scenario_file folder_prefix initial_prefix"
 
 num_node = 17
 eps = 0.000001
@@ -99,7 +100,7 @@ def single_run(folder, initial):
                 loss_dict[(src,dst)] = loss2*100
     return loss_dict
 
-def main(scenario_file, folder_prefix, initial_prefix):
+def main(scenario_file, folder_prefix, initial_prefix, outfilename):
     prob = get_prob(scenario_file)
     loss_list_dict = {}
     for s in prob:
@@ -124,10 +125,21 @@ def main(scenario_file, folder_prefix, initial_prefix):
         if count < 0.999:
             res.append((100, src, dst))
     res.sort(key=lambda x:x[0], reverse=True)
-    for loss, src, dst in res:
-        print loss, src, dst
+    with open(outfilename, 'w') as csvfile: 
+        fields = ['loss', 'src', 'dst', 'percentile']
+        rows = []
+        for loss, src, dst in res:
+            rows.append([loss, src, dst])
+        csvwriter = csv.writer(csvfile)
+        csvwriter.writerow(fields) 
+        csvwriter.writerows(rows)
+        # for loss, src, dst in res:
+        #     print loss, src, dst
 
 scenario_file = sys.argv[1]
 folder_prefix = sys.argv[2]
 initial_prefix = sys.argv[3]
-main(scenario_file, folder_prefix, initial_prefix)
+outfilename = sys.argv[4]
+main(scenario_file, folder_prefix, initial_prefix, outfilename)
+
+# python2 parse_throttle_iperf.py ../_data/scenario_ibm.tab ../iperf_results/ibm_raw/sq_15/ibm_scenario_ ../_data/initialsq/initialsq_ ../iperf_results/ibm_loss/ibm_sq_15.csv

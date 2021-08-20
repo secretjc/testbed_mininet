@@ -1352,6 +1352,30 @@ class OVSBaseQosSwitch( OVSSwitch ):
                 self.dropOVSqos( intf )
         OVSSwitch.stop( self )
 
+    @classmethod
+    def batchStartup( cls, switches, run=errRun ):
+        """Batch startup for OVSQosSwitches, same as OVSSwitch but without reapplying link config
+           switches: switches to start up
+           run: function to run commands (errRun)"""
+        info( '...' )
+        cmds = 'ovs-vsctl'
+        for switch in switches:
+            if switch.isOldOVS():
+                # Ideally we'd optimize this also
+                run( 'ovs-vsctl del-br %s' % switch )
+            for cmd in switch.commands:
+                cmd = cmd.strip()
+                # Don't exceed ARG_MAX
+                if len( cmds ) + len( cmd ) >= cls.argmax:
+                    run( cmds, shell=True )
+                    cmds = 'ovs-vsctl'
+                cmds += ' ' + cmd
+                switch.cmds = []
+                switch.batch = False
+        if cmds:
+            run( cmds, shell=True )
+        return switches
+        
 
 class OVSHtbQosSwitch( OVSBaseQosSwitch ):
     "Open vSwitch with Hierarchical Token Buckets usable with TCIntf."
