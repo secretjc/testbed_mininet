@@ -13,7 +13,7 @@ tunnel_num s t prio weight
 1194 0 6 l 100
 1194 0 6 h 100
 42 0 7 l 78
-45 0 7 l 1
+45 0 7 l 2
 47 0 7 l 19
 42 0 7 h 100
 shutdown 0 8 l
