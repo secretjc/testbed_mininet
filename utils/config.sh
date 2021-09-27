@@ -1,4 +1,4 @@
-git clone https://github.com/secretjc/testbed_mininet.git
+#git clone https://github.com/secretjc/testbed_mininet.git
 echo "git clone https://github.com/secretjc/testbed_mininet.git is done"
 #echo "basic config..."
 #sudo passwd secretjc
